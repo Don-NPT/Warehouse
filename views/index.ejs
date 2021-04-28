@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HomePage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/a896a7a90e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="index-style.css">
+        <script type="application/javascript">
+            function search(){
+                let search = document.getElementById("txtsearch").value;
+                if(search=='jacket'){
+                    all[0].hidden=false;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="top">
+            <div class="container">
+                <div class="user"></div>
+                <a href="aboutus">About us</a>
+                |
+                <a href="login">
+                    <%= (locals.login_str) ? login_str : ''%>
+                </a>
+            </div>
+        </div>
+        <header>
+            <div class="container">
+                <ul>
+                    <li><h1><i class="fas fa-tshirt"></i> Ware<span style="color: #ffc000;">House</span></h1></li>
+                    <li>
+                        <div class="type">
+                            <a href="#">Men</a>
+                            <a href="#">Women</a>
+                            <a href="#">Kids</a>
+                        </div>
+                    </li>
+                    <li style="float:right">
+                        <div class="user">
+                            <%= (locals.user) ? user : ''%>
+                        </div>
+                        <div class="search">
+                            <a href="search">Search <i class="fas fa-search"></i> </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        
+
+
+		<section id="banner">
+			<div class="inner">
+				<h4>WELCOME</h4>
+			</div>
+		</section>
+
+
+        <section class="hot">
+            <div class="hotbar">
+                <h1><i class="fab fa-hotjar"></i> WHAT'S HOT</h1>
+            </div> 
+            <div class="category">
+                <h2>Category</h2><br>
+                <ul>
+                    <a href="#"><li>Long Shirt</li></a>
+                    <a href="#"><li>T-shirts</li></a>
+                    <a href="#"><li>Hoodie</li></a>
+                    <a href="#"><li>Short Pants</li></a>
+                    <a href="#"><li>Long Pants</li></a>
+                    <a href="#"><li>Pajamas</li></a>
+                    <a href="#"><li>Jackets</li></a>
+                    <a href="#"><li>Cardigans</li></a>
+                </ul>
+            </div>
+            <div class="container">
+                <div class="display">
+                    <div class="grid-container">
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/jacket.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">Jackets</span>
+                                    <h3>1550 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/long-pants.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">Long Pants</span>
+                                    <h3>590 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/pajamas.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">Pajamas</span>
+                                    <h3>750 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/cardigan.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">Cardigans</span>
+                                    <h3>450 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/t-shirt.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">T-shirts</span>
+                                    <h3>390 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/hoodie.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">Hoodie</span>
+                                    <h3>600 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/shirt.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">Long Shirt</span>
+                                    <h3>1090 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item">
+                                <img src="images/short-pants.jpg" class="clothes">
+                                <div class="item-description">
+                                    <span style="color: #333;">Short Pants</span>
+                                    <h3>500 Baht</h3>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer></footer>
+    </body>
+</html>

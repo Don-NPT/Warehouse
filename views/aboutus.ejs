@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>About Us</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="aboutus-style.css">
+
+</head>
+
+<body>
+
+	<div class="top">
+		<div class="container">
+			<a href="aboutus">About us</a>
+			|
+			<a href="login">Login</a>
+		</div>
+	</div>
+
+	<header id="header">
+		<div class="inner">
+			<a href="/" class="logo"><strong>Ware</strong> House</a>
+		</div>
+	</header>
+
+
+	<section id="banner">
+		<div class="inner">
+			<header>
+				<h1>Our Team</h1>
+			</header>
+		</div>
+	</section>
+
+
+	<section id="boder" class="wrapper align-center">
+		<div class="inner">
+			<div class="flex flex-2">
+				<article>
+					<div class="image round">
+						<img src="images/sing.jpg" alt="Pic 1" />
+					</div>
+					<header>
+						<h3>Mr.Natthachimongkol<br /> Chayaopathum</h3>
+					</header>
+					<p>Name: Natthachimongkol Chayaopathum<br />Nickname: Sing<br />StudentID: 6288068<br />Sec: 2</p>
+				</article>
+				<article>
+					<div class="image round">
+						<img src="images/yoko.jpg" alt="Pic 2" />
+					</div>
+					<header>
+						<h3>Miss Nattaprapa<br /> Pinjarern</h3>
+					</header>
+					<p>Name: Nattaprapa Pinjarern<br />Nickname: Yoko<br />StudentID: 6288108<br />Sec: 2</p>
+				</article>
+				<article>
+					<div class="image round">
+						<img src="images/pop.jpg" alt="Pic 3" />
+					</div>
+					<header>
+						<h3>Miss Patthita<br /> Somboonyingsuk</h3>
+					</header>
+					<p>Name: Patthita Somboonyingsuk<br />Nickname: Pop<br />StudentID: 6288131<br />Sec: 2</p>
+				</article>
+				<article>
+					<div class="image round">
+						<img src="images/don.jpg" alt="Pic 4" />
+					</div>
+					<header>
+						<h3>Mr.Napat<br /> Sutthiwong</h3>
+					</header>
+					<p>Name: Napat Sutthiwong<br />Nickname: Don<br />StudentID: 6288136<br />Sec: 2</p>
+				</article>
+			</div>
+		</div>
+	</section>
+	<div style="justify-content: center;">
+		<section id="map" style="width:100%;height:400px;">
+			
+		</section>
+	</div>
+	<script>
+		function myMap() {
+			var mapProp= {
+				center:new google.maps.LatLng(13.7965375,100.3262565),
+				zoom:14,
+			};
+			var map = new google.maps.Map(document.getElementById("map"),mapProp);
+
+			var m = new google.maps.Marker({
+				position: { lat: 13.7965375, lng: 100.3262565 },
+				map: map,
+			});
+		}
+	</script>
+		
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChS-7VfzZ-GfFzVUlKh8lCnRNIJykD1Mw&callback=myMap" type="text/javascript"></script>
+
+	<footer></footer>
+</body>
+
+</html>
