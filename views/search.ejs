@@ -4,7 +4,9 @@
         <title>Search</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://kit.fontawesome.com/a896a7a90e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/index-style.css">
         <link rel="stylesheet" href="../css/search-style.css">
+        <link rel="stylesheet" href="../css/login-style.css">
     </head>
     <body>
         <div class="top">
@@ -12,22 +14,43 @@
                 <a href="/" class="logo"><strong>Ware</strong> House</a>
                 <a href="aboutus">About us</a>
                 |
-                <a href="login">Login</a>
+                <a href="login">
+                    <%= (locals.login_str) ? login_str : ''%>
+                </a>
             </div>
         </div>
         <header>
-            <div class="head-container">
-                <h1><i class="fas fa-tshirt"></i> <span style="color: #ffc000;">Search</span></h1>
+            <div class="container">
+                <ul>
+                    <a href="/" class="warehouse">
+                        <li>
+                            <h1><span style="color: #fff;"><i class="fas fa-tshirt"></i> Ware</span><span style="color: #ffc000;">House</span></h1>
+                        </li>
+                    </a>
+                    <li>
+                        <div class="type">
+                            <a href="#">Men</a>
+                            <a href="#">Women</a>
+                            <a href="#">Kids</a>
+                        </div>
+                    </li>
+                    <li style="float:right">
+                        <div class="user">
+                            <% if(login_str == 'Logout') { %>
+                            <%= (locals.user) ? user : ''%>
+                            <% } %>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </header>
-        <div class="background">
-            <div class="searchbox">
-                <form action="product-search" method="get">
-                    <input type="text" id="textbox" name="searchbox" placeholder="  Enter the keyword...">
-                    <button type="submit" id="searchbutton">Search <i class="fas fa-search"></i></button>
-                </form>
-            </div>
+        <div class="box">
+            <p class="sign">Search <b style="color:#ffc000">Products</b></p>
+            <form class="form1" action="product" method="get">
+                <input class="text" type="text" id="textbox" name="query" placeholder="  Enter the keyword...">
+                <button class="search_btn" type="submit" id="searchbutton">Search <i class="fas fa-search"></i></button>
+            </form>
+            <span class="center"><a href="product/all">View All</a></span>
         </div>
-        
     </body>
 </html>

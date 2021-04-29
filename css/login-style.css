@@ -39,6 +39,10 @@
      
 
     /*banner*/
+     
+    .warehouse {
+        text-decoration: none;
+    }
 
     div.box {
         background-color: #FFFFFF;

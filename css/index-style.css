@@ -173,7 +173,7 @@ footer{
 
 #banner {
     padding: 1em 0 3em 0;
-    background-image: url(images/bg-main.jpg);
+    background-image: url(../images/bg-main.jpg);
     background-size: cover;
     background-position: bottom;
     background-attachment: fixed;

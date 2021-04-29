@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User Management</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/a896a7a90e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="../css/index-style.css">
+    </head>
+    <body>
+        <div class="top">
+            <div class="container">
+                <div class="user"></div>
+                <a href="aboutus">About us</a>
+                |
+                <a href="login">
+                    <%= (locals.login_str) ? login_str : ''%>
+                </a>
+            </div>
+        </div>
+        <header>
+            <div class="container">
+                <ul>
+                    <a href="/" class="warehouse">
+                        <li>
+                            <h1><span style="color: #fff;"><i class="fas fa-tshirt"></i> Ware</span><span style="color: #ffc000;">House</span></h1>
+                        </li>
+                    </a>
+                    <li>
+                        <div class="type">
+                            <a href="#">Men</a>
+                            <a href="#">Women</a>
+                            <a href="#">Kids</a>
+                        </div>
+                    </li>
+                    <li style="float:right">
+                        <div class="user">
+                            <% if(login_str == 'Logout') { %>
+                            <% if(user == 'Admin') { %>
+                                <a href="#"><span style="background: #b52626; padding: 5px;border-radius: 5px;"><%= (locals.user) ? user : ''%></span></a>
+                            <% }else{ %>
+                                <%= (locals.user) ? user : ''%>
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <div class="search">
+                            <a href="search">Search <i class="fas fa-search"></i> </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>

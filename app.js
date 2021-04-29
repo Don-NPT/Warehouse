@@ -1,26 +1,19 @@
-const mysql = require('mysql2');
+//const mysql = require('mysql2');
 const express = require('express');
 const session = require('express-session');
 const bp = require("body-parser");
 const path = require('path');
 const router = express.Router();
-const fs = require("fs");
-const { connect } = require('http2');
-const { EDESTADDRREQ } = require('constants');
-
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'itcs212',
-    password: 'itcs212',
-    database: 'wearhouse',
-});
-
 const app = express();
-connection.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected DB: " + "warehouse");
-});
-app.use("/", router);
+const connection = require('./resources/mysql2-connect').connection;
+const aboutus = require('./routers/aboutus-router');
+const login = require('./routers/login-router');
+const register = require('./routers/register-router');
+const home = require('./routers/home-router');
+const search = require('./routers/search-router');
+const result = require('./routers/result-router');
+const user_manage = require('./routers/user_m-router');
+
 app.use(session({
     secret: 'secret',
     resave: true,
@@ -35,83 +28,15 @@ router.use(bp.json());
 router.use(bp.urlencoded({ extended: true }));
 var role = "normal";
 
-app.get('/', function (req, res) {
-    if (req.session.loggedIn) {
-        res.render('index', {
-            user: req.session.username,
-            login_staus: req.session.loggedIn,
-            login_str: 'Logout'
-        });
-    } else {
-        res.render('index', {
-            login_staus: req.session.loggedIn,
-            login_str: 'Login'
-        });
-    }
-    res.end();
-});
-
-app.post('/register', function (req, res) {
-    var fname = req.body.firstname;
-    var lname = req.body.lastname;
-    var address = req.body.address;
-    var age = req.body.age;
-    var email = req.body.email;
-    var username = req.body.username;
-    var password = req.body.password;
-    var sql1 = 'INSERT INTO userinfo (fname, lname, address, age, email) VALUES (?,?,?,?,?);';
-    var sql2 = "INSERT INTO login (id, username, password, role) VALUES (?,?,?, 'normal');";
-    var id = 1000;
-    if (fname && lname && address && age && email && username && password) {
-        connection.execute(sql1, [fname, lname, address, age, email], function (error, results, field) {
-            if (error == null) {
-                console.log('Personal info stored!');
-                id = results.insertId;
-                connection.execute(sql2, [id, username, password], function (error2, results2, field2) {
-                    res.send("Registration Completed! Go to <a href='/login'>Login<a>");
-                    console.log('Login info stored!');
-                    res.end(); 
-                });
-            } else {
-                res.send('Your username or email has been used!');
-                console.log(error);
-                res.end(); 
-            }
-        });
-        
-    } else {
-        res.send('Please enter the information!');
-        res.end();
-    }
-
-    
-});
-
-// Login for Admin
-// username: Admin
-// password: Admin123
-app.post('/login', function (req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
-    if (username && password) {
-        connection.execute('SELECT * FROM login WHERE username = ? AND password = ?', [username, password], function (error, result, fields) {
-            if (result.length > 0) {
-                req.session.loggedIn = true;
-                req.session.username = username;
-                //res.redirect('/index.html');
-                res.redirect('/');
-                role = result[0].role;
-                console.log(username + ", role: " + role);
-            } else {
-                res.send('Incorrect username and password!');
-            }
-            res.end();
-        });
-    } else {
-        res.send('Please enter username and password!');
-        res.end();
-    }
-});
+//////////////////  Webpage link  ///////////////////////
+app.use('/', home);
+app.use('/login', login);
+app.use('/register', register);
+app.use('/aboutus', aboutus);
+app.use('/search', search);
+app.use('/product', result);
+app.use('/user', result);
+app.use('/usermanage', user_manage);
 
 // Insert user // Please login as admin first
 // method: POST
@@ -429,19 +354,19 @@ router.get('/product/:param', function (req, res) {
 });
 
 var search_product;
-router.get('/product-search', function (req, res) {
-    search_product = req.query.searchbox;
-    if (!search_product) {
-        return res.status(400).send({ error: true, message: 'Please provide product id, product name or maximum price.' });
-    }
+// router.get('/product-search', function (req, res) {
+//     search_product = req.query.searchbox;
+//     if (!search_product) {
+//         return res.status(400).send({ error: true, message: 'Please provide product id, product name or maximum price.' });
+//     }
 
-    return res.redirect('/result');
-    // connection.query('SELECT * FROM product where Pid=? or Pname LIKE ? or price<?', [product, '%'+product+'%', product], function (error, results) {
-    //     if (error) throw error;
-    //     //return res.send({ error: false, data: results[0], message: 'product retrieved' });
-    //     //return redirect(''+results[0].Pid);
-    // });
-});
+//     return res.redirect('/result');
+//     // connection.query('SELECT * FROM product where Pid=? or Pname LIKE ? or price<?', [product, '%'+product+'%', product], function (error, results) {
+//     //     if (error) throw error;
+//     //     //return res.send({ error: false, data: results[0], message: 'product retrieved' });
+//     //     //return redirect(''+results[0].Pid);
+//     // });
+// });
 
 // Eye password function
 function togglePW() {
@@ -454,33 +379,6 @@ function togglePW() {
     }
 }
 
-//////////////////  Webpage link  ///////////////////////
-app.get('/login', function (req, res){
-    if(req.session.loggedIn){
-        req.session.loggedIn = false;
-        res.redirect('/');
-    }else {
-        res.render('login');
-    }
-    
-});
-app.get('/register', function (req, res){
-    res.render('register');
-});
-app.get('/aboutus', function (req, res){
-    res.render('aboutus');
-});
-app.get('/result', function (req, res){
-    connection.query('SELECT * FROM product where Pid=? or Pname LIKE ? or price<?', [search_product, '%'+search_product+'%', search_product], function (error, results) {
-        if (error) throw error;
-        res.render('result', {
-            search_result: JSON.stringify(results, null, 3),
-        });
-    });
-});
-app.get('/search', function (req, res){
-    res.render('search');
-});
 
 //PORT3030
 app.listen(3030, function () {
